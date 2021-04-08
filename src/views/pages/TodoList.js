@@ -6,7 +6,7 @@ function TodoList() {
 		<Container>
 			<Row>
 				<Col md={{ offset: 3, span: 6 }}>
-					<Todos />
+					<Todos/>
 				</Col>
 			</Row>
 		</Container>

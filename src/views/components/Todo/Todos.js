@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Tabs, Tab } from 'react-bootstrap';
 
 import AddTodoForm from './AddTodoForm';
 import Todo from './Todo';
 import API from '../../../service/todoAPI';
 
 function Todos() {
+	const [filter, setFilter] = useState("All");
 	const [isFetchingTodos, setIsFetchingTodos] = useState(false);
 	const [todos, setTodos] = useState([]);
 
@@ -52,18 +53,61 @@ function Todos() {
 					<Spinner animation="border" />
 				</div>
 			);
-		} else if (todos.length === 0) {
-			return <p className="text-center text-muted mt-5">No todos yet! Add one above!</p>;
-		} else {
-			return todos.map(todo => (
-				<Todo
-						todo={todo}
-						key={todo.id}
-						onTodoUpdate={onTodoUpdate}
-						onTodoRemoval={onTodoRemoval}
-					/>
-			))
 		}
+
+		if (todos.length === 0) {
+			return <p className="text-center text-muted mt-5">No todos yet! Add one above!</p>;
+		}
+
+		return (
+			<Tabs
+				variant="pills"
+				defaultActiveKey={filter}
+				transition={false}
+				onSelect={(eventKey) => setFilter(eventKey)}>
+					<Tab title="Filter" className="text-muted font-weight-bold" disabled></Tab>
+					<Tab eventKey="All" title="All">
+						{todos.map(todo => (
+                <Todo
+                    todo={todo}
+                    key={todo.id}
+                    onTodoUpdate={onTodoUpdate}
+                    onTodoRemoval={onTodoRemoval}
+                />
+            ))}
+					</Tab>
+					<Tab eventKey="Completed" title="Completed">
+						{todos.map(todo => {
+							if (todo.completed) {
+								return (
+									<Todo
+                    todo={todo}
+                    key={todo.id}
+                    onTodoUpdate={onTodoUpdate}
+                    onTodoRemoval={onTodoRemoval}
+                />)
+							}
+
+							return null;
+						})}
+					</Tab>
+					<Tab eventKey="Uncomplete" title="Uncomplete">
+						{todos.map(todo => {
+							if (!todo.completed) {
+								return (
+									<Todo
+                    todo={todo}
+                    key={todo.id}
+                    onTodoUpdate={onTodoUpdate}
+                    onTodoRemoval={onTodoRemoval}
+                />)
+							}
+
+							return null;
+						})}
+					</Tab>
+				</Tabs>
+		);
 	}
 
 	return (
