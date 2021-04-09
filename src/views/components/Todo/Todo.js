@@ -6,7 +6,8 @@ import {
 	faTimesCircle,
 	faTrash,
 	faEdit,
-	faSave } from '@fortawesome/free-solid-svg-icons'
+	faSave
+} from '@fortawesome/free-solid-svg-icons'
 
 import API from '../../../service/todoAPI';
 
@@ -35,7 +36,6 @@ function EditTodo({ todo, onTodoUpdate }) {
 				<Form onSubmit={updateTodo}>
 					<div>
 						<Form.Control
-							focus
 							type="text"
 							value={newTask}
 							onChange={e => setNewTask(e.target.value)}/>

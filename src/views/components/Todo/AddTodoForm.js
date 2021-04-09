@@ -10,45 +10,42 @@ function AddTodoForm({ onNewTodo }) {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const submitNewTodo = async e => {
-			e.preventDefault();
-			setIsSubmitting(true);
-			try {
-				let response = await API.post('/todos', {task: newTodo});
-				let todo = response.data;
-				onNewTodo(todo);
-			} catch(err) {
-				console.log(err)
-			} finally {
-				setIsSubmitting(false);
-				setNewTodo('');
-			}
+		e.preventDefault();
+		setIsSubmitting(true);
+		try {
+			let response = await API.post('/todos', {task: newTodo});
+			let todo = response.data;
+			onNewTodo(todo);
+		} catch(err) {
+			console.log(err)
+		} finally {
+			setIsSubmitting(false);
+			setNewTodo('');
+		}
 	};
 
 	return (
-			<Form onSubmit={submitNewTodo}>
-					<InputGroup className="mb-3">
-							<Form.Control
-									value={newTodo}
-									onChange={e => setNewTodo(e.target.value)}
-									type="text"
-									placeholder="New Todo"
-									aria-describedby="basic-addon1"
-							/>
-							<InputGroup.Append>
-									<Button
-											type="submit"
-											variant="success"
-											disabled={!newTodo.length}
-											className={isSubmitting ? 'disabled' : ''}
-									>
-											{isSubmitting
-												? <Spinner animation="border" size="sm" />
-												: <div>Add Todo <FontAwesomeIcon icon={faPlus} className="ml-2" /></div>
-											}
-									</Button>
-							</InputGroup.Append>
-					</InputGroup>
-			</Form>
+		<Form onSubmit={submitNewTodo}>
+			<InputGroup className="mb-3">
+				<Form.Control
+					value={newTodo}
+					onChange={e => setNewTodo(e.target.value)}
+					type="text"
+					placeholder="New Todo"/>
+				<InputGroup.Append>
+					<Button
+						type="submit"
+						variant="success"
+						disabled={!newTodo.length}
+						className={isSubmitting ? 'disabled' : ''}>
+						{isSubmitting
+							? <Spinner animation="border" size="sm" />
+							: <div>Add Todo <FontAwesomeIcon icon={faPlus} className="ml-2" /></div>
+						}
+					</Button>
+				</InputGroup.Append>
+			</InputGroup>
+		</Form>
 	);
 }
 

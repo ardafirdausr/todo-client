@@ -15,7 +15,7 @@ if (authUser) {
 	token = `Bearer ${authUser.token}`
 }
 
-const API = axios.create({
+export default axios.create({
 	baseURL: endpoint,
 	timeout: 5000,
 	headers: {
@@ -28,5 +28,3 @@ const API = axios.create({
 		}
 	}
 });
-
-export default API
