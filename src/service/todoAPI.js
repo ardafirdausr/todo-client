@@ -1,30 +1,27 @@
 import axios from 'axios'
-// TODO: fix this
+
 import { endpoint } from '../config/api';
 
-const getUser = () => {
-	const auth = window.localStorage.getItem('user');
-	return auth
-		? JSON.parse(auth)
-		: null;
-};
+const axiosApiInstance = axios.create({baseURL: endpoint, timeout: 5000});
 
-let authUser = getUser();
-let token = "";
-if (authUser) {
-	token = `Bearer ${authUser.token}`
-}
-
-export default axios.create({
-	baseURL: endpoint,
-	timeout: 5000,
-	headers: {
-		common: {
-			"Authorization": `Bearer ${token}`,
-		},
-		post: {
-			"Accept": "application/json",
-			"Content-Type": "application/json",
+axiosApiInstance.interceptors.request.use(
+  async config => {
+    let user = window.localStorage.getItem('user');
+		if (!user) {
+			return config
 		}
-	}
+
+		user = JSON.parse(user)
+		let token = `Bearer ${user.token}`
+    config.headers = {
+      'Authorization': token,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+    return config;
+  },
+  error => {
+    Promise.reject(error)
 });
+
+export default axiosApiInstance;

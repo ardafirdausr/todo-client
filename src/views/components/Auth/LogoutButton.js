@@ -10,6 +10,7 @@ function LogoutButton({ to }) {
 	const history = useHistory();
 
 	const successHandler = function() {
+		localStorage.removeItem("user")
 		setUser(null);
 		history.push(to);
 	}

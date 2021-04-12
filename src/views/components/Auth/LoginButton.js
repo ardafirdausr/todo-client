@@ -11,13 +11,15 @@ function LoginButton({ to }) {
 
 	const successHandler = function (response) {
 		let { profileObj: profile, tokenObj: token } = response;
-
-		setUser({
+		let user = {
 			name: profile.name,
 			email: profile.email,
 			imageUrl: profile.imageUrl,
 			token: token.id_token
-		});
+		}
+
+		localStorage.setItem("user", JSON.stringify(user))
+		setUser(user);
 
 		history.push(to);
 	}
