@@ -3,19 +3,13 @@ import { Route, Redirect } from 'react-router-dom';
 
 import { useUserContext } from '../../../contexts/user';
 
-function AuthRoute({ children, ...rest }) {
+function AuthRoute(props) {
   let { user } = useUserContext();
+  if (!user) {
+    return <Redirect to={{pathname: "/login", state: { from: props.location }}} />
+  }
 
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        user
-          ? children
-          : <Redirect to={{pathname: "/login", state: { from: location }}} />
-      }
-    />
-  );
+  return <Route {...props} />
 }
 
 export default AuthRoute;

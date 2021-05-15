@@ -45,6 +45,7 @@ function LoginButton({ to }) {
 			onSuccess={successHandler}
 			onFailure={failedHandler}
 			cookiePolicy={'single_host_origin'}
+			isSignedIn={true}
 			theme="dark"/>
 	);
 }
