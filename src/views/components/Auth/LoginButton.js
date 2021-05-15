@@ -25,7 +25,7 @@ function LoginButton({ to }) {
 				"token_id": googleAuth.tokenId
 			});
 			let { data: user, token } = response.data;
-			localStorage.setItem("todo_auth_token", token)
+			user.token = token
 			localStorage.setItem("user", JSON.stringify(user))
 			setUser(user);
 			history.push(to);
@@ -45,7 +45,6 @@ function LoginButton({ to }) {
 			onSuccess={successHandler}
 			onFailure={failedHandler}
 			cookiePolicy={'single_host_origin'}
-			isSignedIn={true}
 			theme="dark"/>
 	);
 }

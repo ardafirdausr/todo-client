@@ -10,8 +10,7 @@ function LogoutButton({ to }) {
 	let { setUser } = useUserContext();
 
 	const successHandler = function() {
-		localStorage.removeItem("todo_auth_token");
-		localStorage.removeItem("user")
+		localStorage.removeItem("user");
 		setUser(null);
 		history.push(to);
 	}

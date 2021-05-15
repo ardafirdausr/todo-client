@@ -12,9 +12,9 @@ axiosApiInstance.interceptors.request.use(
       'Content-Type': 'application/json'
     }
 
-    let token = window.localStorage.getItem('todo_auth_token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
+    let user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      config.headers.Authorization = `Bearer ${user.token}`
     }
 
     return config;
@@ -23,18 +23,16 @@ axiosApiInstance.interceptors.request.use(
     Promise.reject(error)
 });
 
-// axiosApiInstance.interceptors.response.use(
-//   response => response,
-//   error => {
-//     // let { setUser } = useUserContext();
-//     console.log(error)
-//     if (error.response.status === 401) {
-//       window.localStorage.removeItem("todo_auth_token");
-//       // setUser(null)
-//     }
+axiosApiInstance.interceptors.response.use(
+  response => response,
+  error => {
+    console.log(error)
+    if (error.response.status === 401) {
+      window.location = "/logout"
+    }
 
-//     return Promise.reject(error);
-//   }
-// );
+    return Promise.reject(error);
+  }
+);
 
 export default axiosApiInstance;

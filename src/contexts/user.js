@@ -1,11 +1,7 @@
 
 import { useState, createContext, useContext } from "react";
 
-let userData = null
-let userDataString = localStorage.getItem("user")
-if (userDataString) {
-  userData = JSON.parse(userDataString)
-}
+const userData = JSON.parse(localStorage.getItem("user"))
 
 const userContext = createContext();
 

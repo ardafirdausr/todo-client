@@ -9,6 +9,7 @@ import { UserProvider } from './contexts/user';
 import AuthRoute from './views/components/Auth/AuthRoute';
 import TodoList from './views/pages/TodoList';
 import Login from './views/pages/Login';
+import Logout from './views/pages/Logout';
 
 import './App.scss';
 
@@ -17,9 +18,8 @@ function App() {
     <UserProvider>
       <Router>
         <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
+          <Route path="/login" component={Login}></Route>
+          <Route path="/logout" component={Logout}></Route>
           <AuthRoute path="/">
             <TodoList />
           </AuthRoute>
