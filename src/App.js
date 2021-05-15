@@ -5,7 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 
-import { ProvideAuth } from './views/components/Auth/Auth';
+import { UserProvider } from './contexts/user';
 import AuthRoute from './views/components/Auth/AuthRoute';
 import TodoList from './views/pages/TodoList';
 import Login from './views/pages/Login';
@@ -14,7 +14,7 @@ import './App.scss';
 
 function App() {
   return (
-    <ProvideAuth>
+    <UserProvider>
       <Router>
         <Switch>
           <Route path="/login">
@@ -25,7 +25,7 @@ function App() {
           </AuthRoute>
         </Switch>
       </Router>
-    </ProvideAuth>
+    </UserProvider>
   );
 }
 

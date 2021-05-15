@@ -3,7 +3,7 @@ import { Spinner, Tabs, Tab } from 'react-bootstrap';
 
 import AddTodoForm from './AddTodoForm';
 import Todo from './Todo';
-import API from '../../../service/todoAPI';
+import todoAPI from '../../../adapters/todoAPI';
 
 function Todos() {
 	const [filter, setFilter] = useState("All");
@@ -13,7 +13,7 @@ function Todos() {
 	const getAllTodos = async () => {
 		try {
 			setIsFetchingTodos(true);
-			let response = await API.get("/todos");
+			let response = await todoAPI.get("/todos");
 			let todos = response.data;
 			setTodos([...todos])
 		} catch(err) {

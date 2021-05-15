@@ -2,14 +2,15 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import { GoogleLogout } from 'react-google-login';
 
+import { useUserContext } from '../../../contexts/user';
 import { clientId } from '../../../config/oauth';
-import { useAuth } from './Auth';
 
 function LogoutButton({ to }) {
-	const { setUser } = useAuth();
 	const history = useHistory();
+	let { setUser } = useUserContext();
 
 	const successHandler = function() {
+		localStorage.removeItem("todo_auth_token");
 		localStorage.removeItem("user")
 		setUser(null);
 		history.push(to);

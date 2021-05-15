@@ -3,7 +3,7 @@ import { Form, InputGroup, Button, Spinner } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
-import API from '../../../service/todoAPI';
+import todoAPI from '../../../adapters/todoAPI';
 
 function AddTodoForm({ onNewTodo }) {
 	const [newTodo, setNewTodo] = useState('');
@@ -13,7 +13,7 @@ function AddTodoForm({ onNewTodo }) {
 		e.preventDefault();
 		setIsSubmitting(true);
 		try {
-			let response = await API.post('/todos', {task: newTodo});
+			let response = await todoAPI.post('/todos', {task: newTodo});
 			let todo = response.data;
 			onNewTodo(todo);
 		} catch(err) {

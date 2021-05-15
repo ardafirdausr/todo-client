@@ -2,26 +2,36 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import { GoogleLogin } from 'react-google-login';
 
+import todoAPI from '../../../adapters/todoAPI';
+import { useUserContext } from '../../../contexts/user';
 import { clientId } from '../../../config/oauth';
-import { useAuth } from './Auth';
 
 function LoginButton({ to }) {
-	const { setUser } = useAuth();
 	const history = useHistory();
+	let { setUser } = useUserContext();
 
-	const successHandler = function (response) {
+	const successHandler = async function (response) {
+
 		let { profileObj: profile, tokenObj: token } = response;
-		let user = {
+		let googleAuth = {
 			name: profile.name,
 			email: profile.email,
 			imageUrl: profile.imageUrl,
-			token: token.id_token
+			tokenId: token.id_token
 		}
 
-		localStorage.setItem("user", JSON.stringify(user))
-		setUser(user);
-
-		history.push(to);
+		try {
+			let response = await todoAPI.post('/auth/login', {
+				"token_id": googleAuth.tokenId
+			});
+			let { data: user, token } = response.data;
+			localStorage.setItem("todo_auth_token", token)
+			localStorage.setItem("user", JSON.stringify(user))
+			setUser(user);
+			history.push(to);
+		} catch(err) {
+			console.log(err)
+		}
 	}
 
 	const failedHandler = function (resp) {

@@ -9,7 +9,7 @@ import {
 	faSave
 } from '@fortawesome/free-solid-svg-icons'
 
-import API from '../../../service/todoAPI';
+import todoAPI from '../../../adapters/todoAPI';
 
 function EditTodo({ todo, onTodoUpdate }) {
 	const [newTask, setNewTask] = useState(todo.task);
@@ -19,7 +19,7 @@ function EditTodo({ todo, onTodoUpdate }) {
 		e.preventDefault();
 		try {
 			setIsUpdating(true)
-			let response = await API.put(`/todos/${todo.id}`, {
+			let response = await todoAPI.put(`/todos/${todo.id}`, {
 				task: newTask,
 				completed: todo.completed,
 			});
@@ -63,7 +63,7 @@ function DisplayTodo({ todo, onTodoUpdate, onTodoRemoval, onTodoEdit }) {
 	const toggleCompletion = async () => {
 		onTodoUpdate(todo)
 		try {
-			let response = await API.put(`/todos/${todo.id}`, {
+			let response = await todoAPI.put(`/todos/${todo.id}`, {
 				task: todo.task,
 				completed: !todo.completed,
 			});
@@ -76,7 +76,7 @@ function DisplayTodo({ todo, onTodoUpdate, onTodoRemoval, onTodoEdit }) {
 
 	const deleteTodo = async () => {
 		try {
-			await API.delete(`/todos/${todo.id}`)
+			await todoAPI.delete(`/todos/${todo.id}`)
 			onTodoRemoval(todo);
 		} catch(err) {
 			console.log(err)

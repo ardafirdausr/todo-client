@@ -1,11 +1,11 @@
 import { Container, Row, Col, Card, Media } from 'react-bootstrap';
 
+import { useUserContext } from '../../contexts/user';
 import Todos from '../components/Todo/Todos'
-import { useAuth } from '../components/Auth/Auth';
 import LogoutButton from '../components/Auth/LogoutButton';
 
 function TodoList() {
-	const { user } = useAuth();
+	const { user } = useUserContext();
 
 	return (
 		<Container>

@@ -2,13 +2,13 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import { Container, Row, Col, Card } from 'react-bootstrap';
 
+import { useUserContext } from '../../contexts/user';
 import { name } from '../../config/app';
-import { useAuth } from '../components/Auth/Auth';
 import LoginButton from '../components/Auth/LoginButton';
 import Logo from '../../assets/todo.svg';
 
 function Login() {
-	const { user } = useAuth();
+	const { user } = useUserContext();
 	const history = useHistory();
 
 	if (user) {
@@ -25,7 +25,7 @@ function Login() {
 				<Col md={{ offset: 4, span: 4 }} className="mt-4">
 					<Card className="shadow">
 						<Card.Body>
-							<h1 className="text-upper text-info mb-5">{name}</h1>
+							<h1 className="text-upper text-info mb-5 text-center">{name}</h1>
 							<p className="text-muted font-weight-bolder text-center">Sign in to your Google Account to start</p>
 							<div className="d-flex justify-content-center">
 								<LoginButton to="/" />

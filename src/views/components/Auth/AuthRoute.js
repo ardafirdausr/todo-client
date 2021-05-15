@@ -1,18 +1,18 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { useAuth } from './Auth';
+import { useUserContext } from '../../../contexts/user';
 
 function AuthRoute({ children, ...rest }) {
-  let auth = useAuth();
+  let { user } = useUserContext();
 
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        auth.user
-				? children
-				: <Redirect to={{pathname: "/login", state: { from: location }}} />
+        user
+          ? children
+          : <Redirect to={{pathname: "/login", state: { from: location }}} />
       }
     />
   );
