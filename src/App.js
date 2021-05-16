@@ -7,6 +7,7 @@ import {
 
 import { UserProvider } from './contexts/user';
 import AuthRoute from './views/components/Auth/AuthRoute';
+import GuestRoute from './views/components/Auth/GuestRoute';
 import TodoList from './views/pages/TodoList';
 import Login from './views/pages/Login';
 import Logout from './views/pages/Logout';
@@ -19,7 +20,7 @@ function App() {
     <UserProvider>
       <Router>
         <Switch>
-          <Route exact path="/login" component={Login} />
+          <GuestRoute exact path="/login" component={Login} />
           <AuthRoute exact path="/logout" component={Logout} />
           <AuthRoute exact path="/" component={TodoList} />
           <Route component={NotFound} />

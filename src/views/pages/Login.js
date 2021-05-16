@@ -1,21 +1,11 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
 import { Container, Row, Col, Card } from 'react-bootstrap';
 
-import { useUserContext } from '../../contexts/user';
 import { name } from '../../config/app';
 import LoginButton from '../components/Auth/LoginButton';
 import Logo from '../../assets/todo.svg';
 
 function Login() {
-	const { user } = useUserContext();
-	const history = useHistory();
-
-	if (user) {
-		history.push("/");
-		return null;
-	}
-
 	return (
 		<Container>
 			<Row className="align-items-center">

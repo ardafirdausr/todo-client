@@ -30,6 +30,7 @@ function LoginButton({ to }) {
 			setUser(user);
 			history.push(to);
 		} catch(err) {
+			alert("Login Failed")
 			console.log(err)
 		}
 	}

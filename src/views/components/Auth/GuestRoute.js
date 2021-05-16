@@ -5,9 +5,9 @@ import { useUserContext } from '../../../contexts/user';
 
 function AuthRoute(props) {
   let { user } = useUserContext();
-  return !user
-    ? <Redirect to={{pathname: "/login", state: { from: props.location }}} />
-    : <Route {...props} />
+	return !user
+		? <Route {...props} />
+		: <Redirect to={{pathname: "/", state: { from: props.location }}} />
 }
 
 export default AuthRoute;
