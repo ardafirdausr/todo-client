@@ -14,7 +14,8 @@ function Todos() {
 		try {
 			setIsFetchingTodos(true);
 			let response = await todoAPI.get("/todos");
-			let todos = response.data;
+			let payload = response.data;
+      let { data: todos } = payload;
 			setTodos([...todos])
 		} catch(err) {
 			console.log(err)

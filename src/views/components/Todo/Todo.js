@@ -23,11 +23,15 @@ function EditTodo({ todo, onTodoUpdate }) {
 				task: newTask,
 				completed: todo.completed,
 			});
-			let updatedTodo = response.data;
+			let payload = response.data;
+      let { data: updatedTodo } = payload;
 			onTodoUpdate(updatedTodo);
 		} catch(err) {
 			console.log(err);
-		}
+      onTodoUpdate(todo)
+		} finally {
+      setIsUpdating(false)
+    }
 	}
 
 	return (
@@ -67,7 +71,8 @@ function DisplayTodo({ todo, onTodoUpdate, onTodoRemoval, onTodoEdit }) {
 				task: todo.task,
 				completed: !todo.completed,
 			});
-			let updatedTodo = response.data;
+			let payload = response.data;
+      let { data: updatedTodo } = payload;
 			onTodoUpdate(updatedTodo);
 		} catch(err) {
 			console.log(err)

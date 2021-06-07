@@ -14,7 +14,8 @@ function AddTodoForm({ onNewTodo }) {
 		setIsSubmitting(true);
 		try {
 			let response = await todoAPI.post('/todos', {task: newTodo});
-			let todo = response.data;
+			let payload = response.data;
+      let { data: todo } = payload;
 			onNewTodo(todo);
 		} catch(err) {
 			console.log(err)
