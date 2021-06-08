@@ -10,7 +10,7 @@ function Login() {
 		<Container>
 			<Row className="align-items-center">
 				<Col md={{ offset: 4, span: 4 }} className="text-center">
-					<img src={Logo} alt="TODO APP" width={300}/>
+					<img src={Logo} alt="TODO" width={300}/>
 				</Col>
 				<Col md={{ offset: 4, span: 4 }} className="mt-4">
 					<Card className="shadow">
