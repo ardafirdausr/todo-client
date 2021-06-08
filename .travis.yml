@@ -3,7 +3,7 @@ language: node_js
 node_js:
 - 14
 
-before_deploy:
+before_script:
 - touch .env
 - echo REACT_APP_NAME=$REACT_APP_NAME >> .env
 - echo REACT_APP_VERSION=$REACT_APP_VERSION >> .env
